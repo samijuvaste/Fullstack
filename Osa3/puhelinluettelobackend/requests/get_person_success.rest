@@ -1,0 +1,1 @@
+GET https://puhelinluettelo-sami.fly.dev/api/persons

@@ -1,0 +1,7 @@
+POST https://puhelinluettelo-sami.fly.dev/api/persons
+Content-Type: application/json
+
+{
+    "name": "Pekka Esimerkki",
+    "number": "+358123456"
+}
