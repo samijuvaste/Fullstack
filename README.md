@@ -1,1 +1,1 @@
-Full Stack kurssin tehtävät
+Here are the exercises made for Fullstack course https://fullstackopen.com
