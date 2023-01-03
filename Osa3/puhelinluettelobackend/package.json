@@ -8,11 +8,13 @@
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ui": "rm -fr build && cd ../../Osa2/puhelinluettelo && npm run build && cp -r build ../../Osa3/puhelinluettelobackend",
-    "deploy:full": "npm run build:ui && fly deploy"
+    "deploy:full": "npm run build:ui && fly deploy",
+    "lint": "eslint ."
   },
   "author": "Sami Juvaste",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^8.31.0",
     "nodemon": "^2.0.20"
   },
   "dependencies": {

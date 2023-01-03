@@ -83,11 +83,15 @@ const App = () => {
             notificate(`Updated ${person.name}`, 'success')
           })
           .catch(e => {
-            notificate(
-              `Information of ${updatedPerson.name} has already been removed from server`,
-              'error'
-            )
-            setPersons(persons.filter(p => p.id !== id))
+            if (e.response && e.response.data.includes('Validation failed')) {
+              notificate(e.response.data, 'error')
+            } else {
+              notificate(
+                `Information of ${updatedPerson.name} has already been removed from server`,
+                'error'
+              )
+              setPersons(persons.filter(p => p.id !== id))
+            }
           })
 
         setNewName('')
@@ -102,7 +106,7 @@ const App = () => {
           setPersons(persons.concat(person))
           notificate(`Added ${person.name}`, 'success')
         })
-        .catch( e => console.log(e))
+        .catch( e => notificate(e.response.data, 'error'))
 
       setNewName('')
       setNewNumber('')
