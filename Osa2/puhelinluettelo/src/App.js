@@ -130,7 +130,7 @@ const App = () => {
   )
 
   const deleteHandling = event => {
-    const person = persons.find(p => p.id === Number(event.target.value))
+    const person = persons.find(p => p.id === event.target.value)
     if (window.confirm(`Delete ${person.name} ?`)) {
       personService
         .deleteObject(event.target.value)

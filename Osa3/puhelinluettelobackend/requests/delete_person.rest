@@ -1,1 +1,1 @@
-DELETE https://puhelinluettelo-sami.fly.dev/api/persons
+DELETE http://localhost:8080/api/persons/63b4333b906fea8c7c061814

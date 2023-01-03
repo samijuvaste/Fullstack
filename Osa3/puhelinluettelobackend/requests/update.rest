@@ -1,0 +1,7 @@
+PUT http://localhost:8080/api/persons/63acb4585321cf8804d2af34
+Content-Type: application/json
+
+{
+    "name": "Jaska Jokunen",
+    "number": "404"
+}
