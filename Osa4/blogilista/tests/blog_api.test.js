@@ -179,7 +179,7 @@ test('modifying a blog should be possible', async () => {
     await api
         .put(`/api/blogs/${blogToModify.id}`)
         .send(blogToModify)
-        .expect(204)
+        .expect(201)
 
     const blogsAtEnd = await helper.blogsInDb()
 
