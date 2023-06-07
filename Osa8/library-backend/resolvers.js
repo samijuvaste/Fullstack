@@ -1,5 +1,7 @@
 const { GraphQLError } = require('graphql')
 const jwt = require('jsonwebtoken')
+const { PubSub } = require('graphql-subscriptions')
+const pubsub = new PubSub()
 
 const User = require('./models/user')
 const Author = require('./models/author')
@@ -43,7 +45,10 @@ const resolvers = {
       }
 
       const book = new Book({...args, author: author._id })
-      return book.save().catch(error => {
+
+      try {
+        await book.save()
+      } catch (error) {
         throw new GraphQLError('Saving book failed', {
           extensions: {
             code: 'BAD_USER_INPUT',
@@ -51,7 +56,11 @@ const resolvers = {
             error
           }
         })
-      })
+      }
+
+      pubsub.publish('BOOK_ADDED', { bookAdded: book })
+
+      return book
     },
     editAuthor: async (root, args, { currentUser }) => {
       if (!currentUser) {
@@ -107,6 +116,11 @@ const resolvers = {
       }
 
       return { value: jwt.sign(userForToken, process.env.JWT_SECRET) }
+    }
+  },
+  Subscription: {
+    bookAdded: {
+      subscribe: () => pubsub.asyncIterator('BOOK_ADDED')
     }
   },
   Author: {
