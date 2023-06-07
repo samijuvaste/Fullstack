@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --fix"
   },
   "author": "Sami Juvaste",
   "license": "ISC",
@@ -18,6 +19,7 @@
     "mongoose-unique-validator": "^4.0.0"
   },
   "devDependencies": {
+    "eslint": "^8.42.0",
     "nodemon": "^2.0.22"
   }
 }
