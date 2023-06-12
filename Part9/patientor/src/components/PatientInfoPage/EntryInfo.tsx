@@ -1,5 +1,7 @@
 import { Entry, Diagnosis } from "../../types";
 
+import TypeInfo from "./TypeInfo";
+
 interface Props {
   entry: Entry;
   dianoses: Diagnosis[];
@@ -7,9 +9,8 @@ interface Props {
 
 const EntryInfo = ({ entry, dianoses }: Props) => {
   return (
-    <div>
-      {`${entry.date} `}
-      <i>{entry.description}</i>
+    <div style={{ border: "solid", borderRadius: "0.5em", marginBottom: "0.5em" }}>
+      <TypeInfo entry={entry} />
       <ul>
         {entry.diagnosisCodes
             ? entry.diagnosisCodes.map(code => (
@@ -20,6 +21,7 @@ const EntryInfo = ({ entry, dianoses }: Props) => {
             : <></>
         }
       </ul>
+      diagnose by {entry.specialist}
     </div>
   );
 };

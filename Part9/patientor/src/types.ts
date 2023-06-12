@@ -31,7 +31,7 @@ interface HealthCheckEntry extends BaseEntry {
 }
 
 interface Discharge {
-  date: string;
+  date?: string;
   criteria: string;
 }
 
