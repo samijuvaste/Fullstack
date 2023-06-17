@@ -59,11 +59,40 @@ const parseHealthCheckRating = (rating: unknown): HealthCheckRating => {
     return rating;
 };
 
+const parseDischarge = (object: unknown): Discharge => {
+    if (!object || typeof object !== 'object') {
+        throw new Error('Incorrect or missing data');
+    }
+    if ('criteria' in object) {
+        const discharge: Discharge = {
+            criteria: parseStringParameter(object.criteria)
+        };
+        if ('date' in object) {
+            discharge.date = parseDate(object.date);
+        }
+        return discharge;
+    }
+    throw new Error('Incorrect discharge: ' + object);
+};
+
+const parseSickLeave = (object: unknown): SickLeave => {
+    if (!object || typeof object !== 'object') {
+        throw new Error('Incorrect or missing data');
+    }
+    if ('startDate' in object && 'endDate' in object) {
+        const sickLeave: SickLeave = {
+            startDate: parseDate(object.startDate),
+            endDate: parseDate(object.endDate)
+        };
+        return sickLeave;
+    }
+    throw new Error('Incorrect sick leave: ' + object);
+};
+
 export const toNewPatient = (object: unknown): NewPatient => {
     if (!object || typeof object !== 'object') {
         throw new Error('Incorrect or missing data');
     }
-
     if (
         'name' in object && 'dateOfBirth' in object && 'ssn' in object &&
         'gender' in object && 'occupation' in object
@@ -121,8 +150,7 @@ export const toNewEntry = (object: unknown): NewEntry => {
                 const newEntry: NewEntry = {
                     ...baseEntry,
                     type: 'Hospital',
-                    //discharge's type is not checked
-                    discharge: object.discharge as Discharge
+                    discharge: parseDischarge(object.discharge)
                 };
                 return newEntry;
             }
@@ -135,8 +163,7 @@ export const toNewEntry = (object: unknown): NewEntry => {
                     employerName: parseStringParameter(object.employerName)
                 };
                 if ('sickLeave' in object) {
-                    //sickLeave's type is not checked
-                    newEntry.sickLeave = object.sickLeave as SickLeave;
+                    newEntry.sickLeave = parseSickLeave(object.sickLeave);
                 }
                 return newEntry;
             }
