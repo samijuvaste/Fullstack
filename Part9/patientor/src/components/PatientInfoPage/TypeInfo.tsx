@@ -62,6 +62,11 @@ const TypeInfo = ({ entry }: Props) => {
           <i>{entry.employerName}</i>
           <br />
           <i>{entry.description}</i>
+          <br />
+          {entry.sickLeave
+          ? `Sick leave: ${entry.sickLeave.endDate} - ${entry.sickLeave.endDate}`
+          : ''
+          }
         </>
       );
     default:
