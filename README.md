@@ -1,1 +1,1 @@
-# Here are the exercises made for Fullstack course https://fullstackopen.com
+# Here are my solutions for exercises in Full Stack Open course (https://fullstackopen.com)
